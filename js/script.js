@@ -233,9 +233,16 @@ for (const item of arr) {
     let title = document.createElement('h3')
     let description = document.createElement('p')
     let priceCountRateBlock = document.createElement('div')
+    priceCountRateBlock.classList.add('price-rate-count')
     let price = document.createElement('div')
+    let priceImage = document.createElement('img')
+    let priceText = document.createElement('span')
     let rate = document.createElement('div')
+    let rateImage = document.createElement('img')
+    let rateText = document.createElement('span')
     let count = document.createElement('div')
+    let countImage = document.createElement('img')
+    let countText = document.createElement('span')
     let buttonAdd = document.createElement('div')
     imageBlock.classList.add('image-block')
     productBlock.classList.add('product-block')
@@ -244,6 +251,21 @@ for (const item of arr) {
     checkbox.type = 'checkbox'
     label.textContent = 'В избранное'
     buttonAdd.classList.add('buttonadd-container')
+    price.appendChild(priceImage)
+    price.appendChild(priceText)
+    price.classList.add('price')
+    rate.appendChild(rateImage)
+    rate.appendChild(rateText)
+    rate.classList.add('rate')
+    count.appendChild(countImage)
+    count.appendChild(countText)
+    count.classList.add('count')
+    priceImage.src = './img/price.svg'
+    rateImage.src = './img/star.svg'
+    countImage.src = './img/box.svg'
+    priceText.textContent = item.price
+    rateText.textContent = item.rating.rate
+    countText.textContent = item.rating.count
     productBlock.appendChild(checkbox)
     buttonAdd.appendChild(label)
     productContainer.appendChild(productBlock)
