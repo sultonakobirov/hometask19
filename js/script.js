@@ -1,3 +1,4 @@
+let productContainer = document.querySelector('.product-container')
 let arr = [{
     "id": 1,
     "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
@@ -219,5 +220,84 @@ let arr = [{
         "count": 145
     }
 }]
-arr = JSON.stringify(arr)
-console.log(typeof(arr));
+// arr = JSON.stringify(arr)
+// console.log(typeof(arr));
+let i = 0
+let prodCount = 0
+for (const item of arr) {
+    i++
+    let countIndicator = document.querySelector('.prod-count')
+    let productBlock = document.createElement('div')
+    let imageBlock = document.createElement('div')
+    let image = document.createElement('img')
+    let title = document.createElement('h3')
+    let description = document.createElement('p')
+    let priceCountRateBlock = document.createElement('div')
+    let price = document.createElement('div')
+    let rate = document.createElement('div')
+    let count = document.createElement('div')
+    let buttonAdd = document.createElement('div')
+    imageBlock.classList.add('image-block')
+    productBlock.classList.add('product-block')
+    let label = document.createElement('label')
+    let checkbox = document.createElement('input')
+    checkbox.type = 'checkbox'
+    label.textContent = 'В избранное'
+    buttonAdd.classList.add('buttonadd-container')
+    productBlock.appendChild(checkbox)
+    buttonAdd.appendChild(label)
+    productContainer.appendChild(productBlock)
+    productBlock.appendChild(imageBlock)
+    imageBlock.appendChild(image)
+    productBlock.appendChild(title)
+    productBlock.appendChild(description)
+    productBlock.appendChild(priceCountRateBlock)
+    productBlock.appendChild(buttonAdd)
+    priceCountRateBlock.appendChild(price)
+    priceCountRateBlock.appendChild(rate)
+    priceCountRateBlock.appendChild(count)
+    image.src = item.image
+    title.textContent = item.title
+    description.textContent = item.description
+    checkbox.id = `korzina${i}`
+    label.setAttribute('for', `korzina${i}`)
+    checkbox.onclick = () =>{
+        if (checkbox.checked) {
+            label.style.backgroundColor = '#1F86FF';
+            label.textContent = "Добавлено"
+            label.style.color = 'white'
+            prodCount++
+            countIndicator.textContent = prodCount
+            productBlock.classList.add('checked')
+        } else {
+            label.style.backgroundColor = 'white';
+            label.textContent = "В избранное"
+            label.style.color = 'black'
+            prodCount--
+            countIndicator.textContent = prodCount
+            productBlock.classList.add('remove')
+        }
+    }
+    let showAll = document.querySelector('.show-all')
+    let home = document.querySelector('.home')
+    let showFive = document.querySelector('.show-five')
+    showAll.addEventListener('click', ()=>{
+        if (checkbox.checked) {
+            checkbox.parentElement.style.display = 'flex'
+        } else {
+            checkbox.parentElement.style.display = 'none'
+        }
+    })
+    showFive.addEventListener('click', ()=>{
+        checkbox.parentElement.style.display = 'none'
+        let checkedBlocks = document.querySelectorAll('.checked')
+        let checkedArr = Array.from(checkedBlocks)
+        let five = checkedArr.slice(0, 5)
+        five.forEach(el => {
+            el.style.display = 'flex'
+        })
+    })
+    home.addEventListener('click', ()=>{
+        checkbox.parentElement.style.display = 'flex'
+    })
+} 
